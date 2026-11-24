@@ -1,0 +1,10 @@
+---
+# defaults for default config
+firewalld_tcp_ports: []
+firewalld_udp_ports: []
+firewalld_icmp_allowed: []
+
+# defaults for host overrides
+firewalld_host_tcp_ports: []
+firewalld_host_udp_ports: []
+firewalld_host_icmp_allowed: []

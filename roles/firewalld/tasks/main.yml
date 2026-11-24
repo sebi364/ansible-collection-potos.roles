@@ -1,0 +1,30 @@
+---
+- name: Firewalld - Open tcp ports
+  ansible.posix.firewalld:
+    port: "{{ __firewalld_port }}/tcp"
+    state: enabled
+    permanent: true
+    immediate: true
+  loop: "{{ firewalld_tcp_ports + firewalld_host_tcp_ports }}"
+  loop_control:
+    loop_var: __firewalld_port
+
+- name: Firewalld - Open udp ports
+  ansible.posix.firewalld:
+    port: "{{ __firewalld_port }}/udp"
+    state: enabled
+    permanent: true
+    immediate: true
+  loop: "{{ firewalld_udp_ports + firewalld_host_udp_ports }}"
+  loop_control:
+    loop_var: __firewalld_port
+
+- name: Firewalld - Block non whitelisted icmp types
+  ansible.posix.firewalld:
+    icmp_block: "{{ __firewalld_icmp_type }}"
+    state: "{{ 'disabled' if __firewalld_icmp_type in (firewalld_icmp_allowed + firewalld_host_icmp_allowed) else 'enabled' }}"
+    permanent: true
+    immediate: true
+  loop: "{{ __firewalld_icmp_blocks }}"
+  loop_control:
+    loop_var: __firewalld_icmp_type
