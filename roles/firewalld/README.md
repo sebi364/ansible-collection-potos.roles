@@ -1,4 +1,4 @@
-# projectpotos.roles netbird Role
+# projectpotos.roles firewalld Role
 
 A brief description of the role goes here.
 
